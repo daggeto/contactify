@@ -1,0 +1,81 @@
+$active: #D8E1E5;
+
+.container {
+  font-size: 1rem;
+  font-weight: 300;
+
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "filters logo"
+    "table profile_card";
+}
+
+.filters {
+  grid-area: filters;
+  background-color: #2164B5;
+  color: white;
+
+  border-radius: 15px 15px 0 0;
+}
+
+.logo {
+  grid-area: logo;
+  color: white;
+  font-size: 3rem;
+  text-transform:uppercase;
+  font-weight: 700;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.table {
+  grid-area: table;
+
+  border-bottom-left-radius: 15px;
+  overflow: hidden;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  table tr th:last-child {
+    padding-left: 3rem;
+    padding-right: 0.5rem;
+  }
+
+  table tr th {
+    color: white;
+    background-color: #4EB7BE;
+    font-weight: 400;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+
+  }
+
+  table tbody tr td {
+    background-color: white;
+    color: #4F4D43;
+
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 2rem;
+
+    cursor: pointer;
+  }
+
+  table tr:hover td {
+    background-color: $active;
+  }
+}
+
+.profileCard {
+  grid-area: profile_card;
+  background-color: $active;
+
+  border-bottom-right-radius: 15px;
+}
+

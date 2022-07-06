@@ -1,0 +1,50 @@
+.filters {
+  display: flex;
+  align-items: center;
+
+  .input {
+    width: 150px;
+    margin-right: $space-xs;
+    padding-bottom: $space-xxs;
+  
+    border: 0;
+    border-bottom: 1px solid white;
+  
+    background-color: transparent;
+  
+    font-size: $font-medium;
+    color: white;
+  
+    outline: 0;
+  }
+  
+  .input::placeholder {
+    color: white;
+  }
+
+  .checkbox {
+    margin-right: $space-xxs;
+
+    width: 18px;
+    height: 18px;
+
+    border: 0;
+    outline: 0;
+  }
+
+  .button {
+    padding: 10px 30px;
+    margin-left: $space-l;
+
+    background-color: $color-turk;
+
+    color: white;
+
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+
+    text-transform: uppercase;
+
+  }
+}

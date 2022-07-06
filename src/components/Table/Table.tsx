@@ -3,6 +3,7 @@ import { User } from "types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faList, faArrowDown, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
+import {Filters} from './components';
 import styles from "./Table.module.scss";
 
 interface Props {
@@ -10,8 +11,6 @@ interface Props {
 }
 
 export function Table({ data }: Props) {
-  console.log(data);
-
   const rows = data.map((user) => {
     const isActiveLogo = <FontAwesomeIcon icon={user.isActive ? faEye : faEyeSlash} />;
 
@@ -31,7 +30,7 @@ export function Table({ data }: Props) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.filters}>Name</div>
+      <div className={styles.filters}><Filters /></div>
       <div className={styles.logo}>Contactify</div>
       <div className={styles.table}>
         <table>

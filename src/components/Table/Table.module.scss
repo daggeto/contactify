@@ -1,5 +1,5 @@
 .container {
-  font-size: 1rem;
+  font-size: 0.8rem;
   font-weight: 300;
 
   display: grid;
@@ -41,7 +41,7 @@
 
   table tr th {
     color: white;
-    height: 48px;
+    height: 50px;
     background-color: $color-turk;
     font-weight: 400;
     padding: $space-xs 0 $space-xs $space-s;
@@ -64,9 +64,9 @@
     background-color: white;
     color: $main-text-color;
 
-    padding-top: $space-xs;
-    padding-bottom: $space-xs;
-    padding-left: $space-s;
+    padding-top: $space-xxs;
+    padding-bottom: $space-xxs;
+    padding-left: $space-xs;
 
     cursor: pointer;
   }

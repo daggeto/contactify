@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { User } from "types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-import { Filters, FieldsList } from "./components";
+import { Filters, FieldsList, ProfileCard } from "./components";
 import styles from "./Table.module.scss";
 
 interface Props {
@@ -11,11 +11,20 @@ interface Props {
 }
 
 export function Table({ data }: Props) {
+  const [currentUserId, setCurrentUserId] = useState<string>();
+
+  const openUserCard = useCallback(
+    (id: string) => () => {
+      setCurrentUserId(id);
+    },
+    []
+  );
+
   const rows = data.map((user) => {
     const isActiveLogo = <FontAwesomeIcon icon={user.isActive ? faEye : faEyeSlash} />;
 
     return (
-      <tr key={user.id}>
+      <tr key={user.id} onClick={openUserCard(user.id)}>
         <td className="alignLeft">
           {user.name} {user.surname.charAt(0)}.
         </td>
@@ -51,7 +60,9 @@ export function Table({ data }: Props) {
           <tbody>{rows}</tbody>
         </table>
       </div>
-      <div className={styles.profileCard}></div>
+      <div className={styles.profileCard}>
+        <ProfileCard id={currentUserId} />
+      </div>
     </div>
   );
 }

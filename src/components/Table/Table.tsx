@@ -1,9 +1,9 @@
 import React from "react";
 import { User } from "types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faList, faArrowDown, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
-import {Filters} from './components';
+import { Filters, FieldsList } from "./components";
 import styles from "./Table.module.scss";
 
 interface Props {
@@ -30,10 +30,12 @@ export function Table({ data }: Props) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.filters}><Filters /></div>
+      <div className={styles.filters}>
+        <Filters />
+      </div>
       <div className={styles.logo}>Contactify</div>
       <div className={styles.table}>
-        <table>
+        <table cellPadding={0}>
           <tr>
             <th className="alignLeft">
               Name <FontAwesomeIcon icon={faArrowDown} />
@@ -43,7 +45,7 @@ export function Table({ data }: Props) {
             <th className="alignLeft">Email</th>
             <th className="alignRight">Phone</th>
             <th className="alignRight">
-              <FontAwesomeIcon icon={faList} />{" "}
+              <FieldsList />
             </th>
           </tr>
           <tbody>{rows}</tbody>

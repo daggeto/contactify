@@ -39,24 +39,30 @@
     border-collapse: collapse;
   }
 
+  table tr th {
+    color: white;
+    height: 48px;
+    background-color: $color-turk;
+    font-weight: 400;
+    padding: $space-xs 0 $space-xs $space-s;
+  }
+
   table tr th:last-child {
     padding-left: 3rem;
     padding-right: 0.5rem;
+    padding: 0 0 0 $space-s;
   }
 
   table tr th {
     color: white;
     background-color: $color-turk;
     font-weight: 400;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 2rem;
-
+    padding: $space-xs 0 $space-xs $space-s;
   }
 
   table tbody tr td {
     background-color: white;
-    color: #4F4D43;
+    color: $main-text-color;
 
     padding-top: $space-xs;
     padding-bottom: $space-xs;

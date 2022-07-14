@@ -1,0 +1,48 @@
+.fieldsList {
+  position: relative;
+  height: 100%;
+
+  .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+
+    height: 100%;
+  }
+
+  .logoActive {
+    background-color: white;
+
+    color: $color-turk;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 7px 8px;
+    
+    .row {
+      width: 150px;
+      padding: 10px;
+      border-bottom: 1px solid $row-line-color;
+
+      background-color: white;
+
+      color: $main-text-color;
+      font-size: $font-small;
+      text-align: left;
+
+      input {
+        margin-right: $space-xs;
+      }
+    }
+
+    .row:last-child {
+      border: 0;
+    }
+  }
+}

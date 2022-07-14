@@ -74,6 +74,11 @@
   table tr:hover td, .activeRow {
     background-color: $active;
   }
+
+  .fieldListContainer {
+    display: flex;
+    justify-content: right;
+  }
 }
 
 .profileCard {

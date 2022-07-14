@@ -1,7 +1,7 @@
 .fieldsList {
   position: relative;
   height: 100%;
-
+  
   .logo {
     display: flex;
     justify-content: center;
@@ -9,6 +9,7 @@
     padding: 5px;
 
     height: 100%;
+    width: 30px;
   }
 
   .logoActive {

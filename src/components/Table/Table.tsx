@@ -18,7 +18,7 @@ export function Table({ data }: Props) {
     (id: string) => () => {
       setCurrentUserId(id);
     },
-    []
+    [setCurrentUserId]
   );
 
   const rows = data.map((user) => {
@@ -56,7 +56,7 @@ export function Table({ data }: Props) {
             <th></th>
             <th className="alignLeft">Email</th>
             <th className="alignRight">Phone</th>
-            <th className="alignRight">
+            <th className={styles.fieldListContainer}>
               <FieldsList />
             </th>
           </tr>

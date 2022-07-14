@@ -5,6 +5,7 @@ import { faArrowDown, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icon
 
 import { Filters, FieldsList, ProfileCard } from "./components";
 import styles from "./Table.module.scss";
+import classNames from "classnames";
 
 interface Props {
   data: User[];
@@ -22,17 +23,19 @@ export function Table({ data }: Props) {
 
   const rows = data.map((user) => {
     const isActiveLogo = <FontAwesomeIcon icon={user.isActive ? faEye : faEyeSlash} />;
-
+    
+    const rowClassName = user.id === currentUserId ? styles.activeRow : '';
+    
     return (
-      <tr key={user.id} onClick={openUserCard(user.id)}>
-        <td className="alignLeft">
+      <tr key={user.id} onClick={openUserCard(user.id)} >
+        <td className={classNames('alignLeft', rowClassName)}>
           {user.name} {user.surname.charAt(0)}.
         </td>
-        <td className="alignLeft">{user.city}</td>
-        <td className="alignLeft">{isActiveLogo}</td>
-        <td className="alignLeft">{user.email}</td>
-        <td className="alignRight">{user.phone}</td>
-        <td></td>
+        <td className={classNames('alignLeft', rowClassName)}>{user.city}</td>
+        <td className={classNames('alignLeft', rowClassName)}>{isActiveLogo}</td>
+        <td className={classNames('alignLeft', rowClassName)}>{user.email}</td>
+        <td className={classNames('alignRight', rowClassName)}>{user.phone}</td>
+        <td className={rowClassName}></td>
       </tr>
     );
   });

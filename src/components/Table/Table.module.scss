@@ -71,7 +71,7 @@
     cursor: pointer;
   }
 
-  table tr:hover td {
+  table tr:hover td, .activeRow {
     background-color: $active;
   }
 }

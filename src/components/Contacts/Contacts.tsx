@@ -8,14 +8,53 @@ import { Filters, FieldsList, ProfileCard } from "./components";
 import styles from "./Contacts.module.scss";
 
 export function Contacts() {
+  const [visibleFields, setVisibleFields] = useState<string[]>([]);
   const [currentUserId, setCurrentUserId] = useState<string>();
   const { loading, contacts, sort, setSort } = useContacts();
+
+  const isFieldVisible = (fieldName: string) => {
+    return visibleFields.length === 0 || visibleFields.includes(fieldName);
+  };
+
+  const onFieldsListChange = useCallback(
+    (newFields: string[]) => {
+      setVisibleFields(newFields);
+    },
+    [setVisibleFields]
+  );
 
   const openUserCard = useCallback(
     (id: string) => () => {
       setCurrentUserId(id);
     },
     [setCurrentUserId]
+  );
+
+  const thead = (
+    <tr>
+      {isFieldVisible("name") ? (
+        <th
+          className="alignLeft"
+          onClick={() => {
+            setSort(sort === "asc" ? "desc" : "asc");
+          }}
+        >
+          Name <FontAwesomeIcon icon={sort === "asc" ? faArrowDown : faArrowUp} />
+        </th>
+      ) : null}
+
+      {isFieldVisible("city") ? <th className="alignLeft">City</th> : null}
+
+      <th></th>
+
+      {isFieldVisible("email") ? <th className="alignLeft">Email</th> : null}
+
+      {isFieldVisible("phone") ? <th className="alignRight">Phone</th> : null}
+
+      <th className={styles.fieldListContainer}>
+        <FieldsList onChange={onFieldsListChange} />
+      </th>
+    </tr>
   );
 
   let content;
@@ -25,20 +64,27 @@ export function Contacts() {
   } else if (contacts.length === 0) {
     content = <>No data</>;
   } else {
-    const rows = contacts.map((user) => {
+    const tobdy = contacts.map((user) => {
       const isActiveLogo = <FontAwesomeIcon icon={user.isActive ? faEye : faEyeSlash} />;
 
       const rowClassName = user.id === currentUserId ? styles.activeRow : "";
 
       return (
         <tr key={user.id} onClick={openUserCard(user.id)}>
-          <td className={classNames("alignLeft", rowClassName)}>
-            {user.name} {user.surname.charAt(0)}.
-          </td>
-          <td className={classNames("alignLeft", rowClassName)}>{user.city}</td>
+          {isFieldVisible("name") ? (
+            <td className={classNames("alignLeft", rowClassName)}>
+              {user.name} {user.surname.charAt(0)}.
+            </td>
+          ) : null}
+
+          {isFieldVisible("city") ? <td className={classNames("alignLeft", rowClassName)}>{user.city}</td> : null}
+
           <td className={classNames("alignLeft", rowClassName)}>{isActiveLogo}</td>
-          <td className={classNames("alignLeft", rowClassName)}>{user.email}</td>
-          <td className={classNames("alignRight", rowClassName)}>{user.phone}</td>
+
+          {isFieldVisible("email") ? <td className={classNames("alignLeft", rowClassName)}>{user.email}</td> : null}
+
+          {isFieldVisible("phone") ? <td className={classNames("alignRight", rowClassName)}>{user.phone}</td> : null}
+
           <td className={rowClassName}></td>
         </tr>
       );
@@ -46,24 +92,8 @@ export function Contacts() {
 
     content = (
       <table cellPadding={0}>
-        <tr>
-          <th
-            className="alignLeft"
-            onClick={() => {
-              setSort(sort === "asc" ? "desc" : "asc");
-            }}
-          >
-            Name <FontAwesomeIcon icon={sort === "asc" ? faArrowDown : faArrowUp} />
-          </th>
-          <th className="alignLeft">City</th>
-          <th></th>
-          <th className="alignLeft">Email</th>
-          <th className="alignRight">Phone</th>
-          <th className={styles.fieldListContainer}>
-            <FieldsList />
-          </th>
-        </tr>
-        <tbody>{rows}</tbody>
+        <thead>{thead}</thead>
+        <tbody>{tobdy}</tbody>
       </table>
     );
   }

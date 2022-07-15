@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import Head from "next/head";
-import { Table } from "components";
+import { Contacts } from "components";
 import { ContactsProvider } from "hooks";
 
 import styles from "./Index.module.scss";
@@ -16,7 +16,7 @@ export default function Home() {
       </Head>
       <ContactsProvider>
         <div className={styles.mainLayout}>
-          <Table />
+          <Contacts />
         </div>
       </ContactsProvider>
     </>

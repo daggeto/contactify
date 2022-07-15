@@ -6,9 +6,9 @@ import classNames from "classnames";
 import { useContacts } from "hooks";
 
 import { Filters, FieldsList, ProfileCard } from "./components";
-import styles from "./Table.module.scss";
+import styles from "./Contacts.module.scss";
 
-export function Table() {
+export function Contacts() {
   const [currentUserId, setCurrentUserId] = useState<string>();
   const { loading, contacts } = useContacts();
 

@@ -7,3 +7,9 @@ export type User = {
   phone: string;
   isActive: boolean;
 }
+
+export type Filter = {
+  name: string;
+  city: string;
+  isActive: boolean;
+}

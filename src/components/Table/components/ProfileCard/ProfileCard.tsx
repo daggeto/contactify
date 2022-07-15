@@ -27,7 +27,7 @@ export function ProfileCard({ id }: Props) {
   }, [id, setLoading, setUser]);
 
   if (!user) {
-    return <>Empty user</>;
+    return <>No user</>;
   }
 
   if (loading) {
@@ -35,27 +35,24 @@ export function ProfileCard({ id }: Props) {
   }
 
   return (
-    <>
-      <div className={styles.header}></div>
-      <div className={styles.profileCard}>
-        <img src={userPic.src} className={styles.avatar} />
-        <div className={styles.row}>
-          <div className={styles.label}>Name:</div>
-          <div className={styles.info}>{user.name}</div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.label}>City:</div>
-          <div className={styles.info}>{user.city}</div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.label}>Email:</div>
-          <div className={styles.info}>{user.email}</div>
-        </div>
-        <div className={styles.row}>
-          <div className={styles.label}>Phone:</div>
-          <div className={styles.info}>{user.phone}</div>
-        </div>
+    <div className={styles.profileCard}>
+      <img src={userPic.src} className={styles.avatar} />
+      <div className={styles.row}>
+        <div className={styles.label}>Name:</div>
+        <div className={styles.info}>{user.name}</div>
       </div>
-    </>
+      <div className={styles.row}>
+        <div className={styles.label}>City:</div>
+        <div className={styles.info}>{user.city}</div>
+      </div>
+      <div className={styles.row}>
+        <div className={styles.label}>Email:</div>
+        <div className={styles.info}>{user.email}</div>
+      </div>
+      <div className={styles.row}>
+        <div className={styles.label}>Phone:</div>
+        <div className={styles.info}>{user.phone}</div>
+      </div>
+    </div>
   );
 }

@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
-import { User } from "types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowDown, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faArrowDown, faArrowUp, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import classNames from "classnames";
 import { useContacts } from "hooks";
 
@@ -10,7 +9,7 @@ import styles from "./Contacts.module.scss";
 
 export function Contacts() {
   const [currentUserId, setCurrentUserId] = useState<string>();
-  const { loading, contacts } = useContacts();
+  const { loading, contacts, sort, setSort } = useContacts();
 
   const openUserCard = useCallback(
     (id: string) => () => {
@@ -48,8 +47,13 @@ export function Contacts() {
     content = (
       <table cellPadding={0}>
         <tr>
-          <th className="alignLeft">
-            Name <FontAwesomeIcon icon={faArrowDown} />
+          <th
+            className="alignLeft"
+            onClick={() => {
+              setSort(sort === "asc" ? "desc" : "asc");
+            }}
+          >
+            Name <FontAwesomeIcon icon={sort === "asc" ? faArrowDown : faArrowUp} />
           </th>
           <th className="alignLeft">City</th>
           <th></th>

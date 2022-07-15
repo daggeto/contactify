@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { Filter, User } from "types";
+import { Filter, User, SortDirection } from "types";
 
 import { ContactsContext } from "./context";
 
@@ -10,7 +10,8 @@ interface Props {
 export function ContactsProvider({ children }: Props) {
   const [initialContacts, setInitialContacts] = useState<User[]>([]);
   const [contacts, setContacts] = useState<User[]>([]);
-  const [cities, setCities] = useState([])
+  const [cities, setCities] = useState([]);
+  const [sort, setSort] = useState<SortDirection>("asc");
   const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState<Filter>({
     name: "",
@@ -18,12 +19,15 @@ export function ContactsProvider({ children }: Props) {
     isActive: false,
   });
 
-  const setFilterValue = useCallback((key: string, value: string) => {
-    setFilter({ ...filter, [key]: value });
-  }, [filter]);
+  const setFilterValue = useCallback(
+    (key: string, value: string) => {
+      setFilter({ ...filter, [key]: value });
+    },
+    [filter]
+  );
 
   const filterContacts = useCallback(() => {
-    const newContactsToDisplay = initialContacts.filter((contact) => {
+    let newContactsToDisplay = initialContacts.filter((contact) => {
       if (filter.name != "" && !contact.name.includes(filter.name)) {
         return false;
       }
@@ -31,27 +35,41 @@ export function ContactsProvider({ children }: Props) {
       if (filter.city != "" && contact.city !== filter.city) {
         return false;
       }
-      
+
       if (filter.isActive && !contact.isActive) {
         return false;
       }
 
       return true;
     });
-
-    setContacts(newContactsToDisplay);
-  }, [filter, setContacts]);
+  }, [filter, sort, initialContacts, setContacts]);
 
   useEffect(() => {
     const availableCities = [];
     initialContacts.forEach((contact) => {
-      if ( !availableCities.includes(contact.city)) {
+      if (!availableCities.includes(contact.city)) {
         availableCities.push(contact.city);
       }
     });
 
     setCities(availableCities);
+
+    filterContacts();
   }, [initialContacts]);
+
+  useEffect(() => {
+    let sortedContacts = [...contacts];
+
+    sortedContacts.sort((contactA, contactB) => {
+      return contactA.name.localeCompare(contactB.name);
+    });
+
+    if (sort === "desc") {
+      sortedContacts = sortedContacts.reverse();
+    }
+    
+    setContacts(sortedContacts);
+  }, [sort]);
 
   useEffect(() => {
     setLoading(true);
@@ -61,12 +79,13 @@ export function ContactsProvider({ children }: Props) {
         setInitialContacts(data);
         setContacts(data);
         setLoading(false);
+        filterContacts();
       });
   }, []);
 
   return (
     <ContactsContext.Provider
-      value={{ loading, cities, contacts, filter, setFilterValue, filterContacts, sort: "asc" }}
+      value={{ loading, cities, contacts, filter, setFilterValue, filterContacts, sort, setSort }}
     >
       {children}
     </ContactsContext.Provider>

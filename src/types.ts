@@ -13,3 +13,5 @@ export type Filter = {
   city: string;
   isActive: boolean;
 }
+
+export type SortDirection = "asc" | "desc";
